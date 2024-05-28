@@ -1,0 +1,55 @@
+#include <iostream>
+#include <filesystem>
+#include<fstream>
+void listDirectory(const std::string& path) {
+    for (const auto& entry : std::filesystem::directory_iterator(path)) {
+        std::cout << entry.path() << std::endl;
+    }
+}
+
+void createDirectory(const std::string& path) {
+    if (!std::filesystem::create_directory(path)) {
+        std::cerr << "Error creating directory" << std::endl;
+    }
+}
+void copyFile(const std::string& source, const std::string& destination) {
+    std::filesystem::copy(source, destination);
+}
+void moveFile(const std::string& source, const std::string& destination) {
+    std::filesystem::rename(source,destination);
+}
+int main() {
+    std::string command;
+    std::string path;
+
+    std::cout << "Enter a command: ";
+    std::cin >> command;
+
+    if (command == "list") {
+        std::cout << "Enter directory path: ";
+        std::cin >> path;
+        listDirectory(path);
+    } else if (command == "create") {
+        std::cout << "Enter directory path: ";
+        std::cin >> path;
+        createDirectory(path);
+    } else if (command == "copy") {
+        std::string source, destination;
+        std::cout << "Enter source file path: ";
+        std::cin >> source;
+        std::cout << "Enter destination file path: ";
+        std::cin >> destination;
+        copyFile(source, destination);
+    } else if (command == "move") {
+        std::string source, destination;
+        std::cout << "Enter source file path: ";
+        std::cin >> source;
+        std::cout << "Enter destination file path: ";
+        std::cin >> destination;
+        moveFile(source, destination);
+    } else {
+        std::cerr << "Invalid command" << std::endl;
+    }
+
+    return 0;
+}
