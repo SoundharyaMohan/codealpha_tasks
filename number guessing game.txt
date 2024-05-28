@@ -1,0 +1,26 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int main(){
+    srand(time(0));
+    int rand_no=rand()%100+1;
+    cout<<"\t\t\t\tWELCOME TO NUMBER GUESSING GAME!"<<endl;
+    cout<<"TRY TO GUESS THE NUMBER!"<<endl;
+    int guess;
+    do{
+        cout<<"Enter the number between 1 to 100:";
+        cin>>guess;
+        if(guess<rand_no){
+            cout<<"Too Low.Try again!"<<endl;
+        }
+        else if(guess>rand_no){
+            cout<<"Too High.Try again!"<<endl;
+        }
+        else{
+            cout<<"Congratulations You Win"<<endl;
+            cout<<"The number is "<<guess<<" you find it correctly!"<<endl;
+        }
+    }while(guess!=rand_no);
+    return 0;
+}
